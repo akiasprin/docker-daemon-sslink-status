@@ -96,6 +96,7 @@ class SSConner(SSLinker):
 			'password': self.auth,
 			'method': self.method,
 		}), shell=True, start_new_session=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		time.sleep(1.5) #daocloud
 
 	def download(self):
 
