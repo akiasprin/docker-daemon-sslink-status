@@ -3,7 +3,7 @@
 import sys, os, signal, subprocess, socks, socket, time, re, http.client, datetime, json
 from urllib import request
 
-HTML_DIR = '/usr/share/nginx/html/'
+HTML_DIR = '/var/www/html/'
 # HTML_DIR = ''
 
 TEST_URL = 'http://lh3.googleusercontent.com/-ycsvDrTOuqo/Vkuu015PfXI/AAAAAAAAN-o/G8EzTXj65Dg/w3840-h2160/london-city-chromecast-wallpaper-4k.jpg'
