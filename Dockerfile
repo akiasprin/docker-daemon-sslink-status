@@ -51,6 +51,10 @@ RUN chmod 0600 /etc/cron.d/cron-tasks
 
 RUN touch /var/log/cron.log
 
-RUN touch /usr/share/nginx/html/result.json && touch /usr/share/nginx/html/result.jsonp
+RUN touch /var/log/cron.log
+
+RUN touch /var/www/html/result.json && touch /var/www/html/result.jsonp
+
+RUN python3 /app/main.py
 
 ENTRYPOINT ["/usr/bin/supervisord"]
