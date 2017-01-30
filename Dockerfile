@@ -2,6 +2,8 @@ FROM ubuntu:latest
 
 MAINTAINER Daemon-Shadowsocks-Links-Status Maintainers "1025123978@qq.com"
 
+COPY ./163-sources /etc/apt/sources.list
+
 RUN apt-get update \
 	&& apt-get install --no-install-recommends --no-install-suggests -y \
 						ca-certificates \
