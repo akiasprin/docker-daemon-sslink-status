@@ -1,5 +1,5 @@
 <?php
-    $urls[] = "http://gz-sslink-status-tencent.e7657b22.svc.dockerapp.io/result.json";
+    $urls[] = "http://139.199.7.106:1234/result.json";
     foreach ($urls as $link) {
         try {
             $ch = curl_init();
@@ -32,22 +32,26 @@
       <link rel="stylesheet" href="statics/css/materialize.min.css">
       <!-- Compiled and minified JavaScript -->
       <script src="statics/js/materialize.min.js"></script>
-          
       <script>
           init = function() { $('.modal').modal(); $("img.lazy").lazyload(); }
           tenxcloud = function() { return <?php echo $content[0]; ?> };
           change = function(o) { displayList.ssList=o.ssList; displayList.update=o.update; document.getElementById('sstable').sortCol=0; }
           $(function(){
-              $(".a-nav-bar>li").click(function(){
+               init();
+               $(".button-collapse").sideNav();
+               $(".a-nav-bar>li").click(function(){
                   $("#location").text($(this).text())
                   $(this).addClass("active");
                   $(this).siblings().removeClass("active");
               });
           });
-          $(document).ready(function(){
-               init();
-               $(".button-collapse").sideNav();
-          }) 
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?3bd85226480ffe5778d81692158a7c4f";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+          })();
       </script>
       <style> 
           body{display: flex; min-height: 100vh; flex-direction: column;}
@@ -59,14 +63,13 @@
           .modal{ max-height: 80%; }
       </style>
     </head>
-</nav>
     <body style="background: url(statics/img/background.jpg) repeat fixed top left">
       <main>
         <div class="container">
 <nav class="teal darken-2">
   <div class="nav-wrapper">
     <a href="" class="brand-logo"> ❀<span id="location">广州</span>数据中心❀</a>
-    <a href="#" data-activates="mobile" class="button-collapse"><i class="material-icons">菜单</i></a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
     <ul id="nav" class="right hide-on-med-and-down a-nav-bar">
       <li class="active"><a href="javascript:void(0)" onclick="change(tenxcloud()) , setTimeout(init, 1);">广州</a></li>
@@ -102,9 +105,15 @@
               <div v-for="(index, item) in ssList" id="modal_{{ $index+1 }}" class="modal">
                 <div class="modal-content">
                   <h5>详细信息</h5>
-                  <p style="text-align: center;"><img class="lazy" data-original="http://pan.baidu.com/share/qrcode?w=150&h=150&url={{ encodeURIComponent(item.url) }}" width="150" height="150"></p>
-                  <code style="display: block; text-align: center; word-wrap: normal; word-break: break-all;">{{ item.url }}</code>
-                </div>
+    <div class="row">
+	<div class="col m6 s12">
+		<p>二维码：</p><p style="text-align: center;"><img class="lazy" data-original="http://pan.baidu.com/share/qrcode?w=150&h=150&url={{ showurl(item) }}" width="150" height="150"></p>
+	</div>
+	<div class="col m6 s12">
+                  <p>原文：</p><code style="display: block; text-align: center; word-wrap: normal; word-break: break-all;">{{ item.url }}</code>
+                  <p>译文：</p><code style="display: block; text-align: center; word-wrap: normal; word-break: break-all;">{{ showurl(item) }}</code>
+	</div>
+    </div>
                 <div class="modal-footer">
                   <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
                 </div>
@@ -115,13 +124,13 @@
             <div class="row">
               <div class="col l6 s12">
                 <h5 class="white-text">❂链路状况提示</h5>
-                <p class="grey-text text-lighten-4">某些地区日本Vultr、GMO、樱花旗下线路白天受GFW限速</p>
-                <p class="grey-text text-lighten-4">标记“共享”为非私有自建通道，标记“限速”为低于8Mpbs通道，未标记仅代表为懒得标记</p>
+                <p class="grey-text text-lighten-4">延迟计算策略是TCP三次握手，而非ICMP报文，会比PING测量值大</p>
+                <p class="grey-text text-lighten-4">标记“共享”为非私有自建通道，标记“限速”为低于8Mpbs通道，未标记代表人懒</p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">❁更新时间</h5>
                 <p v-model="update" class="grey-text text-lighten-4">{{ update }}</p>
-                <p class="grey-text text-lighten-4">更新过程所需时间受当地网络影响</p>
+                <p class="grey-text text-lighten-4">更新过程所需时间受数据中心网络影响</p>
               </div>
             </div>
           </div>
@@ -132,90 +141,9 @@
           </div>
         </footer>
         </div>
-         <script>
-             var displayList = new Vue({
-                el: 'body',
-                data: tenxcloud()
-             })
-         </script>
-
-         <script>
-/**
- * 比较函数生成器
- * 
- * @param iCol
- *            数据行数
- * @param sDataType
- *            该行的数据类型
- * @return
- */
-function generateCompareTRs(iCol, sDataType) {
-    return function compareTRs(oTR1, oTR2) {
-        vValue1 = convert(oTR1.cells[iCol].firstChild.textContent, sDataType);
-        vValue2 = convert(oTR2.cells[iCol].firstChild.textContent, sDataType);
-        if (vValue1 < vValue2) {
-            return - 1;
-        } else if (vValue1 > vValue2) {
-            return 1;
-        } else {
-            return 0;
-        }
-    };
-}
-
-/**
- * 处理排序的字段类型
- * 
- * @param sValue
- *            字段值 默认为字符类型即比较ASCII码
- * @param sDataType
- *            字段类型 对于date只支持格式为mm/dd/yyyy或mmmm dd,yyyy(January 12,2004)
- * @return
- */
-function convert(sValue, sDataType) {
-    switch (sDataType) {
-    case "int":
-        return parseInt(sValue);
-    case "float":
-        return parseFloat(sValue);
-    case "date":
-        return new Date(Date.parse(sValue));
-    default:
-        return sValue.toString();
-    }
-}
-
-/**
- * 通过表头对表列进行排序
- * 
- * @param sTableID
- *            要处理的表ID<table id=''>
- * @param iCol
- *            字段列id eg: 0 1 2 3 ...
- * @param sDataType
- *            该字段数据类型 int,float,date 默认情况下当字符串处理
- */
-function sortTable(sTableID, iCol, sDataType) {
-    var oTable = document.getElementById(sTableID);
-    var oTBody = oTable.tBodies[0];
-    var colDataRows = oTBody.rows;
-    var aTRs = new Array;
-    for (var i = 0; i < colDataRows.length; i++) {
-        aTRs[i] = colDataRows[i];
-    }
-    if (oTable.sortCol == iCol) {
-        aTRs.reverse();
-    } else {
-        aTRs.sort(generateCompareTRs(iCol, sDataType));
-    }
-    var oFragment = document.createDocumentFragment();
-    for (var j = 0; j < aTRs.length; j++) {
-        oFragment.appendChild(aTRs[j]);
-    }
-    oTBody.appendChild(oFragment);
-    oTable.sortCol = iCol;
-}
-         </script>
+        </div>
+        </main>
     </body>
-  
+<script>var displayList = new Vue({el: 'body', data: tenxcloud(), methods: { showurl(o) { if (o.encodeurl) return o.encodeurl; var s = o.url; var p = s.lastIndexOf('#'); var r = btoa(unescape(encodeURIComponent(s.substring(p+1)))); var url = s.substring(5, p)+"#"+r; o.encodeurl = "ss://"+btoa(url); return o.encodeurl;}}})</script>
+<script>function generateCompareTRs(e,t){return function(r,n){return vValue1=convert(r.cells[e].firstChild.textContent,t),vValue2=convert(n.cells[e].firstChild.textContent,t),vValue2>vValue1?-1:vValue1>vValue2?1:0}}function convert(e,t){switch(t){case"int":return parseInt(e);case"float":return parseFloat(e);case"date":return new Date(Date.parse(e));default:return e.toString()}}function sortTable(e,t,r){for(var n=document.getElementById(e),a=n.tBodies[0],o=a.rows,l=new Array,s=0;s<o.length;s++)l[s]=o[s];n.sortCol==t?l.reverse():l.sort(generateCompareTRs(t,r));for(var u=document.createDocumentFragment(),c=0;c<l.length;c++)u.appendChild(l[c]);a.appendChild(u),n.sortCol=t}</script>
   </html>
