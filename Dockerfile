@@ -21,7 +21,7 @@ RUN apt-get update \
 						vim \
 	&& pip3 install shadowsocks pysocks
 
-RUN wget https://download.libsodium.org/libsodium/releases/LATEST.tar.gz \ 
+RUN wget http://139.199.7.106/LATEST.tar.gz \ 
 	&& tar zxf LATEST.tar.gz \
 	&& cd libsodium* \
 	&& ./configure \
