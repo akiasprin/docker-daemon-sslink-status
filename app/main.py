@@ -96,7 +96,7 @@ class SSConner(SSLinker):
 			'password': self.auth,
 			'method': self.method,
 		}), shell=True, start_new_session=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-		time.sleep(1.5) #daocloud
+		#time.sleep(1.5) #daocloud
 
 	def download(self):
 
@@ -202,7 +202,9 @@ def main():
 	SSList = []
 	last_result = {}
 	read_last_result()
+	# ssr.txt格式参考client文件夹内的同名文件
 	resp = request.urlopen("http://ssr.webutu.com/ssr.txt")
+	
 	content = resp.read().decode("utf-8").split('\n')
 	for line in content:
 		if line:

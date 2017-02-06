@@ -22,7 +22,7 @@
     
     <head>
       <meta charset='UTF-8'>
-      <title>❂影梭链路状态查看器❂</title>
+      <title>1024幸福家园导航</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <script src="statics/js/vue.js"></script>
       <script src="statics/js/jquery-1.9.1.min.js"></script>
@@ -99,10 +99,10 @@
 <span class="new badge" data-badge-caption="KB/s" v-if="item.speed-item.last_speed>0">▲{{ (item.speed-item.last_speed) }}</span>
 <span class="new badge blue-grey" data-badge-caption="KB/s" v-if="item.speed-item.last_speed<0">▼{{ (item.last_speed-item.speed) }}</span>
                 </td>
-                <td><a href="#modal_{{ $index+1 }}" class="grey-text text-darken-2">{{ item.remark }}</a></td>
+                <td><a href="#ss_{{ $index+1 }}" class="grey-text text-darken-2">{{ item.remark }}</a></td>
               </tr>
             </table>
-              <div v-for="(index, item) in ssList" id="modal_{{ $index+1 }}" class="modal">
+              <div v-for="(index, item) in ssList" id="ss_{{ $index+1 }}" class="modal">
                 <div class="modal-content">
                   <h5>详细信息</h5>
     <div class="row">
@@ -125,7 +125,7 @@
               <div class="col l6 s12">
                 <h5 class="white-text">❂链路状况提示</h5>
                 <p class="grey-text text-lighten-4">延迟计算策略是TCP三次握手，而非ICMP报文，会比PING测量值大</p>
-                <p class="grey-text text-lighten-4">标记“共享”为非私有自建通道，标记“限速”为低于8Mpbs通道，未标记代表人懒</p>
+                <p class="grey-text text-lighten-4">标记“共享”为非私有“自”建通道，标记“限速”为低于8Mpbs通道，未标记代表人懒</p>
               </div>
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">❁更新时间</h5>
@@ -136,7 +136,7 @@
           </div>
           <div class="footer-copyright">
             <div class="container">
-            Copyright © 2016 KEVI_ - 禁止转发。禁止二次利用。禁止转载至任何网页。
+            Copyright © 2016 KEVI_ - 数据来源互联网。禁止转发。禁止二次利用。禁止转载至任何网页。
             </div>
           </div>
         </footer>
