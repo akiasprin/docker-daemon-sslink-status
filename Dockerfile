@@ -19,6 +19,7 @@ RUN apt-get update \
 						wget \
 						curl \
 						vim \
+						tzdata \
 	&& pip3 install shadowsocks pysocks
 
 RUN wget http://download.libsodium.org/libsodium/releases/LATEST.tar.gz \ 
@@ -35,7 +36,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 EXPOSE 80 443
 
-#RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
