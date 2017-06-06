@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:16.04
 
 MAINTAINER Daemon-Shadowsocks-Links-Status Maintainers "askasprin@gmail.com"
 
@@ -35,7 +35,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 EXPOSE 80 443
 
-RUN timedatectl set-timezone 'Asia/Shanghai'
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
