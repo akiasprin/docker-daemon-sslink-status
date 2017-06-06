@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-MAINTAINER Daemon-Shadowsocks-Links-Status Maintainers "1025123978@qq.com"
+MAINTAINER Daemon-Shadowsocks-Links-Status Maintainers "askasprin@gmail.com"
 
 COPY ./163-sources /etc/apt/sources.list
 
@@ -21,7 +21,7 @@ RUN apt-get update \
 						vim \
 	&& pip3 install shadowsocks pysocks
 
-RUN wget http://139.199.7.106/LATEST.tar.gz \ 
+RUN wget http://download.libsodium.org/libsodium/releases/LATEST.tar.gz \ 
 	&& tar zxf LATEST.tar.gz \
 	&& cd libsodium* \
 	&& ./configure \
@@ -53,6 +53,6 @@ RUN touch /var/log/cron.log
 
 RUN touch /var/www/html/result.json && touch /var/www/html/result.jsonp
 
-RUN python3 /app/main.py
+# RUN python3 /app/main.py
 
 ENTRYPOINT ["/usr/bin/supervisord"]
